@@ -1,17 +1,27 @@
 {
-  "users": {
-    "u0001": {
-      "total_correct": 0,
-      "total_wrong": 0,
-      "daily_history": [],
-      "badges": [],
-      "current_session": null,
-      "today": {
-        "date": null,
-        "correct": 0,
-        "wrong": 0,
-        "total": 0
-      }
+    "users": {
+        "u0001": {
+            "total_correct": 0,
+            "total_wrong": 0,
+            "daily_history": [],
+            "badges": [],
+            "current_session": {
+                "started_at": "2026-02-19T20:20:40+00:00",
+                "set_size": 10,
+                "direction": "de-en",
+                "boxes": [
+                    1,
+                    2,
+                    3
+                ],
+                "finished": false
+            },
+            "today": {
+                "date": null,
+                "correct": 0,
+                "wrong": 0,
+                "total": 0
+            }
+        }
     }
-  }
 }
