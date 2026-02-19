@@ -1,18 +1,21 @@
 /* theme-contrast.css – high contrast dark theme */
 :root {
-  --bg: #0d0d0d;
-  --card-bg: #1a1a1a;
-  --text: #f5f5f5;
-  --primary: #facc15;
-  --primary-text: #0d0d0d;
-  --secondary: #a3a3a3;
-  --border: #333333;
-  --success: #22c55e;
-  --error: #f87171;
+  --bg: #0f0f13;
+  --card-bg: #1c1c24;
+  --text: #f1f5f9;
+  --primary: #a78bfa;
+  --primary-dark: #7c3aed;
+  --primary-text: #0f0f13;
+  --primary-shadow: rgba(167,139,250,0.40);
+  --primary-glow: rgba(167,139,250,0.20);
+  --secondary: #94a3b8;
+  --border: #2d2d3a;
+  --success: #34d399;
+  --error: #fb7185;
 }
 body { background: var(--bg); color: var(--text); }
-.btn-primary  { background: var(--primary);  color: var(--primary-text); font-weight: 800; }
-.btn-success  { background: var(--success);  color: #000; font-weight: 700; }
-.btn-error    { background: var(--error);    color: #000; font-weight: 700; }
+.btn-primary  { background: linear-gradient(135deg, #a78bfa, #7c3aed); color: #fff; font-weight: 700; }
+.btn-success  { background: linear-gradient(135deg, #34d399, #059669); color: #0f0f13; font-weight: 700; }
+.btn-error    { background: linear-gradient(135deg, #fb7185, #e11d48); color: #fff; font-weight: 700; }
 .card         { background: var(--card-bg);  border: 1px solid var(--border); }
-.motivation-toast { background: var(--primary); color: var(--primary-text); }
+.motivation-toast { background: linear-gradient(135deg, #a78bfa, #7c3aed); color: #fff; }

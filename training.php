@@ -95,8 +95,8 @@ require_once __DIR__ . '/partials/header.php';
 
 <!-- Progress bar -->
 <div class="mb-4">
-  <div class="flex justify-between text-sm mb-1" style="color:var(--secondary)">
-    <span id="card-counter">1 / <?= count($training_set) ?></span>
+  <div class="flex justify-between text-sm font-medium mb-2" style="color:var(--secondary)">
+    <span id="card-counter" class="font-semibold">1 / <?= count($training_set) ?></span>
     <span id="progress-text">0 / <?= count($training_set) ?></span>
   </div>
   <div class="progress-bar-track">
@@ -105,9 +105,9 @@ require_once __DIR__ . '/partials/header.php';
 </div>
 
 <!-- Header buttons -->
-<div class="flex gap-2 mb-4 justify-end">
-  <button id="btn-pause" class="btn btn-secondary text-sm px-3 py-2">⏸ Pause</button>
-  <button id="btn-end-set" class="btn btn-secondary text-sm px-3 py-2">🏁 Abbrechen</button>
+<div class="flex gap-2 mb-5 justify-end">
+  <button id="btn-pause" class="btn btn-secondary text-sm px-4 py-2 rounded-xl">⏸ Pause</button>
+  <button id="btn-end-set" class="btn btn-secondary text-sm px-4 py-2 rounded-xl">🏁 Abbrechen</button>
 </div>
 
 <!-- Training wrapper -->
@@ -124,23 +124,25 @@ require_once __DIR__ . '/partials/header.php';
 
         <!-- Front face -->
         <div class="card-face card-face--front">
-          <div class="text-xs font-semibold mb-2 uppercase tracking-wider" style="color:var(--secondary)">
+          <div class="text-xs font-bold mb-3 uppercase tracking-widest px-3 py-1 rounded-full"
+               style="background:var(--border);color:var(--secondary)">
             <?= $lang_front === 'de' ? '🇩🇪 Deutsch' : '🇬🇧 Englisch' ?>
           </div>
-          <div id="front-word" class="text-2xl font-bold mb-4" style="color:var(--text)"></div>
+          <div id="front-word" class="text-3xl font-extrabold mb-5" style="color:var(--text)"></div>
           <button id="btn-tts-front" type="button"
-                  class="btn btn-secondary text-xl px-4 py-2" aria-label="Vorlesen">🔊</button>
-          <p class="text-xs mt-4" style="color:var(--secondary)">Karte antippen zum Umdrehen</p>
+                  class="btn btn-secondary px-5 py-2.5 rounded-2xl text-lg" aria-label="Vorlesen">🔊</button>
+          <p class="text-xs mt-5 font-medium" style="color:var(--secondary)">Tippen zum Umdrehen ↕</p>
         </div>
 
         <!-- Back face -->
         <div class="card-face card-face--back">
-          <div class="text-xs font-semibold mb-2 uppercase tracking-wider" style="color:var(--secondary)">
+          <div class="text-xs font-bold mb-3 uppercase tracking-widest px-3 py-1 rounded-full"
+               style="background:var(--border);color:var(--secondary)">
             <?= $lang_front === 'de' ? '🇬🇧 Englisch' : '🇩🇪 Deutsch' ?>
           </div>
-          <div id="back-word" class="text-2xl font-bold mb-4" style="color:var(--text)"></div>
+          <div id="back-word" class="text-3xl font-extrabold mb-5" style="color:var(--text)"></div>
           <button id="btn-tts-back" type="button"
-                  class="btn btn-secondary text-xl px-4 py-2" aria-label="Vorlesen">🔊</button>
+                  class="btn btn-secondary px-5 py-2.5 rounded-2xl text-lg" aria-label="Vorlesen">🔊</button>
         </div>
 
       </div><!-- card-flip -->
@@ -148,32 +150,32 @@ require_once __DIR__ . '/partials/header.php';
   </div><!-- card-stack -->
 
   <!-- Action bar (shown after flip) -->
-  <div id="action-bar" class="hidden flex gap-3 mt-4">
-    <button id="btn-wrong"   class="btn btn-error   flex-1 py-3 text-lg">✗ Falsch</button>
-    <button id="btn-correct" class="btn btn-success flex-1 py-3 text-lg">✓ Richtig</button>
+  <div id="action-bar" class="hidden flex gap-3 mt-5">
+    <button id="btn-wrong"   class="btn btn-error   flex-1 py-4 text-lg rounded-2xl">✗ Falsch</button>
+    <button id="btn-correct" class="btn btn-success flex-1 py-4 text-lg rounded-2xl">✓ Richtig</button>
   </div>
 
 </div><!-- training-wrap -->
 
 <!-- Result screen (hidden initially) -->
-<div id="result-screen" class="hidden card p-6 text-center">
-  <div class="text-5xl mb-4">🏆</div>
-  <h2 class="text-2xl font-bold mb-2" style="color:var(--text)">Geschafft!</h2>
-  <p class="mb-6" style="color:var(--secondary)">Du hast alle <span id="result-total"></span> Karten bearbeitet.</p>
-  <div class="grid grid-cols-2 gap-4 mb-6">
-    <div class="card p-4">
-      <div class="text-3xl font-bold" style="color:var(--success)" id="result-correct">0</div>
-      <div class="text-sm text-muted">Richtig</div>
+<div id="result-screen" class="hidden card p-8 text-center">
+  <div class="text-6xl mb-4" style="animation:bounce-in 0.5s cubic-bezier(0.16,1,0.3,1)">🏆</div>
+  <h2 class="text-2xl font-extrabold mb-2" style="color:var(--text)">Geschafft!</h2>
+  <p class="mb-6 text-muted">Du hast alle <span id="result-total" class="font-bold" style="color:var(--primary)"></span> Karten bearbeitet.</p>
+  <div class="grid grid-cols-2 gap-4 mb-7">
+    <div class="card p-4 stat-card-green">
+      <div class="text-4xl font-extrabold" style="color:#065f46" id="result-correct">0</div>
+      <div class="text-sm font-semibold mt-1" style="color:#047857">✓ Richtig</div>
     </div>
-    <div class="card p-4">
-      <div class="text-3xl font-bold" style="color:var(--error)" id="result-wrong">0</div>
-      <div class="text-sm text-muted">Falsch</div>
+    <div class="card p-4 stat-card-red">
+      <div class="text-4xl font-extrabold" style="color:#991b1b" id="result-wrong">0</div>
+      <div class="text-sm font-semibold mt-1" style="color:#b91c1c">✗ Falsch</div>
     </div>
   </div>
   <div class="flex gap-3 justify-center">
     <a href="/training.php?boxes=<?= htmlspecialchars($boxes_param) ?>&direction=<?= htmlspecialchars($direction) ?>"
-       class="btn btn-primary">🔁 Nochmal</a>
-    <a href="/index.php" class="btn btn-secondary">🏠 Home</a>
+       class="btn btn-primary px-6 py-3 rounded-2xl">🔁 Nochmal</a>
+    <a href="/index.php" class="btn btn-secondary px-6 py-3 rounded-2xl">🏠 Home</a>
   </div>
 </div>
 

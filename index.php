@@ -30,9 +30,9 @@ require_once __DIR__ . '/partials/header.php';
 ?>
 
 <!-- User greeting -->
-<div class="flex items-center gap-3 mb-6">
-  <div class="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center text-3xl"
-       style="background:var(--border)">
+<div class="flex items-center gap-3 mb-6 p-4 card shadow-sm">
+  <div class="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center text-3xl ring-2 flex-shrink-0"
+       style="background:var(--border);ring-color:var(--primary)">
     <?php if (!empty($current_user['avatar'])): ?>
       <img src="/uploads/avatars/<?= htmlspecialchars(basename($current_user['avatar'])) ?>"
            alt="Avatar" class="w-full h-full object-cover">
@@ -40,65 +40,65 @@ require_once __DIR__ . '/partials/header.php';
       👤
     <?php endif; ?>
   </div>
-  <div>
-    <div class="text-sm text-muted">Hallo,</div>
-    <div class="text-xl font-bold" style="color:var(--text)"><?= htmlspecialchars($current_user['name'] ?? 'Nutzer') ?></div>
+  <div class="flex-1 min-w-0">
+    <div class="text-xs font-medium text-muted">Willkommen zurück 👋</div>
+    <div class="text-xl font-bold truncate" style="color:var(--text)"><?= htmlspecialchars($current_user['name'] ?? 'Nutzer') ?></div>
   </div>
-  <a href="/users.php" class="ml-auto btn btn-secondary text-sm px-3 py-2">Wechseln</a>
+  <a href="/users.php" class="btn btn-secondary text-sm px-3 py-2 flex-shrink-0">Wechseln</a>
 </div>
 
 <!-- Donut chart + stats -->
 <div class="card p-4 mb-5 shadow-sm">
   <div class="section-title">📦 Vokabeln nach Boxen</div>
   <div class="flex flex-col sm:flex-row items-center gap-6">
-    <div class="w-48 h-48 flex-shrink-0">
+    <div class="w-44 h-44 flex-shrink-0">
       <canvas id="chart-boxes"></canvas>
     </div>
     <div class="flex-1 grid grid-cols-2 gap-3 w-full">
-      <div class="card p-3 text-center">
-        <div class="text-2xl font-bold" style="color:var(--error)"><?= $box_counts[1] ?></div>
-        <div class="text-xs text-muted">Box 1 (neu)</div>
+      <div class="card p-3 text-center stat-card-red">
+        <div class="text-2xl font-bold" style="color:#b91c1c"><?= $box_counts[1] ?></div>
+        <div class="text-xs font-medium mt-0.5" style="color:#991b1b">📦 Box 1 (neu)</div>
       </div>
-      <div class="card p-3 text-center">
-        <div class="text-2xl font-bold" style="color:var(--primary)"><?= $box_counts[2] ?></div>
-        <div class="text-xs text-muted">Box 2</div>
+      <div class="card p-3 text-center stat-card-blue">
+        <div class="text-2xl font-bold" style="color:#1d4ed8"><?= $box_counts[2] ?></div>
+        <div class="text-xs font-medium mt-0.5" style="color:#1e40af">📦 Box 2</div>
       </div>
-      <div class="card p-3 text-center">
-        <div class="text-2xl font-bold" style="color:var(--success)"><?= $box_counts[3] ?></div>
-        <div class="text-xs text-muted">Box 3 (gut)</div>
+      <div class="card p-3 text-center stat-card-green">
+        <div class="text-2xl font-bold" style="color:#065f46"><?= $box_counts[3] ?></div>
+        <div class="text-xs font-medium mt-0.5" style="color:#047857">📦 Box 3 (gut)</div>
       </div>
-      <div class="card p-3 text-center">
-        <div class="text-2xl font-bold" style="color:var(--secondary)"><?= $error_rate ?>%</div>
-        <div class="text-xs text-muted">Fehlerrate</div>
+      <div class="card p-3 text-center stat-card-yellow">
+        <div class="text-2xl font-bold" style="color:#92400e"><?= $error_rate ?>%</div>
+        <div class="text-xs font-medium mt-0.5" style="color:#78350f">❌ Fehlerrate</div>
       </div>
-      <div class="card p-3 text-center">
-        <div class="text-2xl font-bold" style="color:var(--text)"><?= $total_vocabs ?></div>
-        <div class="text-xs text-muted">Gesamt</div>
+      <div class="card p-3 text-center stat-card-purple">
+        <div class="text-2xl font-bold" style="color:#4c1d95"><?= $total_vocabs ?></div>
+        <div class="text-xs font-medium mt-0.5" style="color:#5b21b6">📚 Gesamt</div>
       </div>
-      <div class="card p-3 text-center">
-        <div class="text-2xl font-bold" style="color:var(--text)"><?= $total_unlocked ?></div>
-        <div class="text-xs text-muted">Freigeschaltet</div>
+      <div class="card p-3 text-center" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-color:#7dd3fc">
+        <div class="text-2xl font-bold" style="color:#0c4a6e"><?= $total_unlocked ?></div>
+        <div class="text-xs font-medium mt-0.5" style="color:#075985">🔓 Freigeschaltet</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Training settings -->
-<div class="card p-4 mb-5 shadow-sm">
+<div class="card p-5 mb-5 shadow-sm">
   <div class="section-title">🎯 Training konfigurieren</div>
   <form action="/training.php" method="get" id="training-form">
 
     <div class="mb-4">
       <div class="label">Boxen auswählen</div>
       <div class="flex gap-2 flex-wrap" id="box-toggles">
-        <button type="button" class="box-toggle active" data-box="1">Box 1</button>
-        <button type="button" class="box-toggle active" data-box="2">Box 2</button>
-        <button type="button" class="box-toggle active" data-box="3">Box 3</button>
+        <button type="button" class="box-toggle active" data-box="1">📦 Box 1</button>
+        <button type="button" class="box-toggle active" data-box="2">📦 Box 2</button>
+        <button type="button" class="box-toggle active" data-box="3">📦 Box 3</button>
       </div>
       <input type="hidden" name="boxes" id="boxes-input" value="1,2,3">
     </div>
 
-    <div class="mb-4">
+    <div class="mb-5">
       <div class="label">Übersetzungsrichtung</div>
       <div class="flex gap-2">
         <button type="button" class="box-toggle active" id="dir-de-en" data-dir="de-en">🇩🇪 → 🇬🇧</button>
@@ -108,12 +108,12 @@ require_once __DIR__ . '/partials/header.php';
     </div>
 
     <?php if ($total_unlocked === 0): ?>
-      <div class="alert alert-error">Keine Vokabeln freigeschaltet. Bitte Aktivierungswort in den Einstellungen setzen.</div>
+      <div class="alert alert-error">⚠️ Keine Vokabeln freigeschaltet. Bitte Aktivierungswort in den Einstellungen setzen.</div>
     <?php endif; ?>
 
-    <button type="submit" class="btn btn-primary w-full text-lg py-3 mt-2"
+    <button type="submit" class="btn btn-primary w-full text-lg py-3.5 mt-1"
             <?= $total_unlocked === 0 ? 'disabled' : '' ?>>
-      📚 Vokabeltest starten
+      🚀 Vokabeltest starten
     </button>
   </form>
 </div>
@@ -124,21 +124,30 @@ $daily_goal = (int)($current_user['settings']['daily_goal'] ?? 30);
 $today_total = (int)($user_stats['today']['total'] ?? 0);
 $progress_pct = $daily_goal > 0 ? min(100, round(($today_total / $daily_goal) * 100)) : 0;
 ?>
-<div class="card p-4 mb-5 shadow-sm">
+<div class="card p-5 mb-5 shadow-sm">
   <div class="section-title">📅 Tagesziel</div>
-  <div class="flex justify-between text-sm mb-2" style="color:var(--secondary)">
+  <div class="flex justify-between text-sm font-medium mb-2" style="color:var(--secondary)">
     <span><?= $today_total ?> / <?= $daily_goal ?> Vokabeln</span>
-    <span><?= $progress_pct ?>%</span>
+    <span class="font-bold" style="color:var(--primary)"><?= $progress_pct ?>%</span>
   </div>
   <div class="progress-bar-track">
     <div class="progress-bar-fill" style="width:<?= $progress_pct ?>%"></div>
   </div>
+  <?php if ($progress_pct >= 100): ?>
+    <p class="text-sm font-semibold mt-3 text-center" style="color:var(--success)">🎉 Tagesziel erreicht!</p>
+  <?php endif; ?>
 </div>
 
 <!-- Quick nav -->
 <div class="grid grid-cols-2 gap-3">
-  <a href="/stats.php" class="btn btn-secondary flex-col py-4">📊<span class="text-xs mt-1">Statistik</span></a>
-  <a href="/settings.php" class="btn btn-secondary flex-col py-4">⚙️<span class="text-xs mt-1">Einstellungen</span></a>
+  <a href="/stats.php" class="btn btn-secondary flex-col py-5 gap-1 rounded-2xl">
+    <span class="text-2xl">📊</span>
+    <span class="text-xs font-semibold">Statistik</span>
+  </a>
+  <a href="/settings.php" class="btn btn-secondary flex-col py-5 gap-1 rounded-2xl">
+    <span class="text-2xl">⚙️</span>
+    <span class="text-xs font-semibold">Einstellungen</span>
+  </a>
 </div>
 
 <script>

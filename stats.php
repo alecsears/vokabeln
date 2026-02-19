@@ -57,36 +57,36 @@ $use_chart  = true;
 require_once __DIR__ . '/partials/header.php';
 ?>
 
-<h1 class="text-2xl font-bold mb-5" style="color:var(--text)">📊 Statistik</h1>
+<h1 class="text-2xl font-extrabold mb-5" style="color:var(--text)">📊 Statistik</h1>
 
 <!-- Summary cards -->
 <div class="grid grid-cols-2 gap-3 mb-5">
-  <div class="card p-4 text-center">
-    <div class="text-3xl font-bold" style="color:var(--success)"><?= $total_correct ?></div>
-    <div class="text-xs text-muted mt-1">Richtig gesamt</div>
+  <div class="card p-4 text-center stat-card-green">
+    <div class="text-3xl font-extrabold" style="color:#065f46"><?= $total_correct ?></div>
+    <div class="text-xs font-semibold mt-1" style="color:#047857">✓ Richtig gesamt</div>
   </div>
-  <div class="card p-4 text-center">
-    <div class="text-3xl font-bold" style="color:var(--error)"><?= $total_wrong ?></div>
-    <div class="text-xs text-muted mt-1">Falsch gesamt</div>
+  <div class="card p-4 text-center stat-card-red">
+    <div class="text-3xl font-extrabold" style="color:#991b1b"><?= $total_wrong ?></div>
+    <div class="text-xs font-semibold mt-1" style="color:#b91c1c">✗ Falsch gesamt</div>
   </div>
-  <div class="card p-4 text-center">
-    <div class="text-3xl font-bold" style="color:var(--text)"><?= $error_rate ?>%</div>
-    <div class="text-xs text-muted mt-1">Fehlerrate</div>
+  <div class="card p-4 text-center stat-card-yellow">
+    <div class="text-3xl font-extrabold" style="color:#92400e"><?= $error_rate ?>%</div>
+    <div class="text-xs font-semibold mt-1" style="color:#78350f">❌ Fehlerrate</div>
   </div>
-  <div class="card p-4 text-center">
-    <div class="text-3xl font-bold" style="color:var(--primary)"><?= $today_total ?></div>
-    <div class="text-xs text-muted mt-1">Heute gelernt</div>
+  <div class="card p-4 text-center stat-card-blue">
+    <div class="text-3xl font-extrabold" style="color:#1d4ed8"><?= $today_total ?></div>
+    <div class="text-xs font-semibold mt-1" style="color:#1e40af">📅 Heute gelernt</div>
   </div>
 </div>
 
 <!-- Daily goal progress -->
-<div class="card p-4 mb-5">
-  <div class="section-title">🎯 Tagesziel: <?= $today_total ?> / <?= $daily_goal ?></div>
+<div class="card p-5 mb-5">
+  <div class="section-title">🎯 Tagesziel: <span style="color:var(--primary)"><?= $today_total ?> / <?= $daily_goal ?></span></div>
   <div class="progress-bar-track">
     <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
   </div>
   <?php if ($progress_pct >= 100): ?>
-    <p class="text-sm font-semibold mt-2" style="color:var(--success)">🎉 Tagesziel erreicht!</p>
+    <p class="text-sm font-semibold mt-3 text-center" style="color:var(--success)">🎉 Tagesziel erreicht!</p>
   <?php endif; ?>
 </div>
 
