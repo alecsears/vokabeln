@@ -52,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         write_json_atomic(BASE_PATH . '/data/users.json', $users_data);
         $success = 'Design-Einstellungen gespeichert.';
         // Redirect to reload with new theme
-        header('Location: /settings.php?saved=1');
-        exit;
+        redirect('settings.php?saved=1');
     }
 }
 
@@ -66,15 +65,15 @@ $page_title = 'Einstellungen';
 require_once __DIR__ . '/partials/header.php';
 ?>
 
-<h1 class="text-2xl font-bold mb-5" style="color:var(--text)">⚙️ Einstellungen</h1>
+<h1 class="text-2xl font-extrabold mb-5" style="color:var(--text)">⚙️ Einstellungen</h1>
 
-<?php if ($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
-<?php if ($error):   ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+<?php if ($success): ?><div class="alert alert-success">✅ <?= htmlspecialchars($success) ?></div><?php endif; ?>
+<?php if ($error):   ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
 
 <!-- Activation word -->
-<div class="card p-4 mb-5">
+<div class="card p-5 mb-5">
   <div class="section-title">🔑 Aktivierungswort</div>
-  <p class="text-sm text-muted mb-3">
+  <p class="text-sm text-muted mb-4">
     Gib einen englischen Satz aus den Vokabeln ein, bis zu dem Vokabeln freigeschaltet werden.
     Leer lassen = alle Vokabeln freischalten.
   </p>
@@ -82,15 +81,15 @@ require_once __DIR__ . '/partials/header.php';
     <input type="hidden" name="post_action" value="save_activation">
     <label class="label" for="activation_word">Aktivierungswort (englisch)</label>
     <input type="text" id="activation_word" name="activation_word"
-           class="input mb-3"
+           class="input mb-4"
            value="<?= htmlspecialchars($settings['activation_word'] ?? '') ?>"
            placeholder="z.B. I'm from Greenwich.">
-    <button type="submit" class="btn btn-primary w-full">Speichern</button>
+    <button type="submit" class="btn btn-primary w-full py-3 rounded-2xl">💾 Speichern</button>
   </form>
 </div>
 
 <!-- Design settings -->
-<div class="card p-4 mb-5">
+<div class="card p-5 mb-5">
   <div class="section-title">🎨 Design</div>
   <form method="post">
     <input type="hidden" name="post_action" value="save_design">
@@ -102,7 +101,7 @@ require_once __DIR__ . '/partials/header.php';
       </select>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-5">
       <label class="label" for="theme">Farbschema</label>
       <select id="theme" name="theme" class="input">
         <option value="light"    <?= ($design['theme'] ?? '') === 'light'    ? 'selected' : '' ?>>☀️ Hell (Light)</option>
@@ -111,7 +110,7 @@ require_once __DIR__ . '/partials/header.php';
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary w-full">Design speichern</button>
+    <button type="submit" class="btn btn-primary w-full py-3 rounded-2xl">🎨 Design speichern</button>
   </form>
 </div>
 

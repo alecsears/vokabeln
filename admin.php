@@ -18,14 +18,14 @@ require_once __DIR__ . '/partials/header.php';
 <div class="card p-4 mb-5">
   <div class="flex items-center justify-between mb-3">
     <div class="section-title mb-0">👥 Nutzer (<?= count($users) ?>)</div>
-    <a href="/users.php" class="btn btn-primary text-sm px-3 py-2">Alle anzeigen</a>
+    <a href="users.php" class="btn btn-primary text-sm px-3 py-2">Alle anzeigen</a>
   </div>
   <?php foreach ($users as $u): ?>
     <?php $us = $stats_data['users'][$u['id']] ?? []; ?>
     <div class="flex items-center gap-3 py-2" style="border-top:1px solid var(--border)">
       <div class="w-10 h-10 rounded-full flex items-center justify-center text-xl" style="background:var(--border)">
         <?php if (!empty($u['avatar'])): ?>
-          <img src="/uploads/avatars/<?= htmlspecialchars(basename($u['avatar'])) ?>"
+          <img src="uploads/avatars/<?= htmlspecialchars(basename($u['avatar'])) ?>"
                alt="" class="w-full h-full object-cover rounded-full">
         <?php else: ?>👤<?php endif; ?>
       </div>
@@ -37,7 +37,7 @@ require_once __DIR__ . '/partials/header.php';
           🏅 <?= count($us['badges'] ?? []) ?> Abzeichen
         </div>
       </div>
-      <a href="/profile.php?user=<?= htmlspecialchars($u['id']) ?>"
+      <a href="profile.php?user=<?= htmlspecialchars($u['id']) ?>"
          class="btn btn-secondary text-sm px-3 py-2">Profil</a>
     </div>
   <?php endforeach; ?>
@@ -50,7 +50,7 @@ require_once __DIR__ . '/partials/header.php';
     Framework: <strong><?= htmlspecialchars($design['css_framework'] ?? 'tailwind') ?></strong> &nbsp;|&nbsp;
     Theme: <strong><?= htmlspecialchars($design['theme'] ?? 'light') ?></strong>
   </p>
-  <a href="/settings.php" class="btn btn-secondary mt-3 text-sm">Design ändern →</a>
+  <a href="settings.php" class="btn btn-secondary mt-3 text-sm">Design ändern →</a>
 </div>
 
 <!-- Vocabulary overview -->
@@ -84,6 +84,6 @@ foreach ($unlocked as $v) {
   </div>
 </div>
 
-<a href="/settings.php" class="btn btn-primary w-full">⚙️ Einstellungen öffnen</a>
+<a href="settings.php" class="btn btn-primary w-full">⚙️ Einstellungen öffnen</a>
 
 <?php require_once __DIR__ . '/partials/footer.php'; ?>

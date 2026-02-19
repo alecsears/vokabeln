@@ -11,8 +11,7 @@ foreach ($users_data['users'] as $u) {
 }
 
 if ($profile_user === null) {
-    header('Location: /users.php');
-    exit;
+    redirect('users.php');
 }
 
 $success = '';
@@ -97,8 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $design = get_design();
             $design['theme'] = $theme;
             write_json_atomic(BASE_PATH . '/config/design.json', $design);
-            header('Location: /profile.php?user=' . urlencode($uid) . '&saved=1');
-            exit;
+            redirect('profile.php?user=' . urlencode($uid) . '&saved=1');
         }
         $success = 'Einstellungen gespeichert.';
     }
@@ -123,8 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $settings['current_user_id'] = $users_data['users'][0]['id'] ?? 'u0001';
                 write_json_atomic(BASE_PATH . '/data/settings.json', $settings);
             }
-            header('Location: /users.php');
-            exit;
+            redirect('users.php');
         }
     }
 }
@@ -136,8 +133,7 @@ if (isset($_GET['switch']) && $_GET['switch'] === '1') {
     $settings = get_settings();
     $settings['current_user_id'] = $uid;
     write_json_atomic(BASE_PATH . '/data/settings.json', $settings);
-    header('Location: /index.php');
-    exit;
+    redirect('index.php');
 }
 
 $user_stats  = get_statistics();
@@ -147,96 +143,96 @@ $page_title = htmlspecialchars($profile_user['name'] ?? 'Profil');
 require_once __DIR__ . '/partials/header.php';
 ?>
 
-<div class="flex items-center gap-3 mb-5">
-  <div class="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center text-3xl"
-       style="background:var(--border)">
+<div class="flex items-center gap-4 mb-6 p-4 card shadow-sm">
+  <div class="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center text-4xl ring-2 flex-shrink-0"
+       style="background:var(--border);ring-color:var(--primary)">
     <?php if (!empty($profile_user['avatar']) && file_exists(BASE_PATH . '/uploads/avatars/' . basename($profile_user['avatar']))): ?>
-      <img src="/uploads/avatars/<?= htmlspecialchars(basename($profile_user['avatar'])) ?>"
+      <img src="uploads/avatars/<?= htmlspecialchars(basename($profile_user['avatar'])) ?>"
            alt="Avatar" class="w-full h-full object-cover">
     <?php else: ?>👤<?php endif; ?>
   </div>
-  <div>
-    <h1 class="text-2xl font-bold" style="color:var(--text)"><?= htmlspecialchars($profile_user['name']) ?></h1>
-    <div class="text-sm text-muted">ID: <?= htmlspecialchars($uid) ?></div>
+  <div class="flex-1 min-w-0">
+    <h1 class="text-2xl font-extrabold truncate" style="color:var(--text)"><?= htmlspecialchars($profile_user['name']) ?></h1>
+    <div class="text-xs text-muted mt-0.5">ID: <?= htmlspecialchars($uid) ?></div>
   </div>
   <?php if ($uid !== get_current_user_id()): ?>
-    <a href="/profile.php?user=<?= htmlspecialchars($uid) ?>&switch=1"
-       class="ml-auto btn btn-primary text-sm px-3 py-2">Als <?= htmlspecialchars($profile_user['name']) ?> spielen</a>
+    <a href="profile.php?user=<?= htmlspecialchars($uid) ?>&switch=1"
+       class="btn btn-primary text-sm px-4 py-2 rounded-2xl flex-shrink-0">Als <?= htmlspecialchars($profile_user['name']) ?> spielen</a>
   <?php endif; ?>
 </div>
 
-<?php if ($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
-<?php if ($error):   ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+<?php if ($success): ?><div class="alert alert-success">✅ <?= htmlspecialchars($success) ?></div><?php endif; ?>
+<?php if ($error):   ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
 
 <!-- Quick stats -->
 <div class="grid grid-cols-3 gap-3 mb-5">
-  <div class="card p-3 text-center">
-    <div class="text-xl font-bold" style="color:var(--success)"><?= (int)($u_stats['total_correct'] ?? 0) ?></div>
-    <div class="text-xs text-muted">Richtig</div>
+  <div class="card p-3 text-center stat-card-green">
+    <div class="text-xl font-extrabold" style="color:#065f46"><?= (int)($u_stats['total_correct'] ?? 0) ?></div>
+    <div class="text-xs font-semibold mt-0.5" style="color:#047857">✓ Richtig</div>
   </div>
-  <div class="card p-3 text-center">
-    <div class="text-xl font-bold" style="color:var(--error)"><?= (int)($u_stats['total_wrong'] ?? 0) ?></div>
-    <div class="text-xs text-muted">Falsch</div>
+  <div class="card p-3 text-center stat-card-red">
+    <div class="text-xl font-extrabold" style="color:#991b1b"><?= (int)($u_stats['total_wrong'] ?? 0) ?></div>
+    <div class="text-xs font-semibold mt-0.5" style="color:#b91c1c">✗ Falsch</div>
   </div>
-  <div class="card p-3 text-center">
-    <div class="text-xl font-bold" style="color:var(--primary)"><?= count($u_stats['badges'] ?? []) ?></div>
-    <div class="text-xs text-muted">Abzeichen</div>
+  <div class="card p-3 text-center stat-card-purple">
+    <div class="text-xl font-extrabold" style="color:#4c1d95"><?= count($u_stats['badges'] ?? []) ?></div>
+    <div class="text-xs font-semibold mt-0.5" style="color:#5b21b6">🏅 Badges</div>
   </div>
 </div>
 
 <!-- Update name -->
-<div class="card p-4 mb-4">
+<div class="card p-5 mb-4">
   <div class="section-title">✏️ Name ändern</div>
   <form method="post">
     <input type="hidden" name="post_action" value="update_name">
     <label class="label" for="name">Name</label>
-    <input type="text" id="name" name="name" class="input mb-3"
+    <input type="text" id="name" name="name" class="input mb-4"
            value="<?= htmlspecialchars($profile_user['name']) ?>" maxlength="50" required>
-    <button type="submit" class="btn btn-primary w-full">Speichern</button>
+    <button type="submit" class="btn btn-primary w-full py-3 rounded-2xl">💾 Speichern</button>
   </form>
 </div>
 
 <!-- Avatar upload -->
-<div class="card p-4 mb-4">
+<div class="card p-5 mb-4">
   <div class="section-title">🖼️ Avatar</div>
   <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="post_action" value="upload_avatar">
     <label class="label" for="avatar">Bild wählen (JPG, PNG, GIF, WebP · max. 2 MB)</label>
     <input type="file" id="avatar" name="avatar" accept="image/jpeg,image/png,image/gif,image/webp"
-           class="input mb-3">
-    <button type="submit" class="btn btn-primary w-full">Hochladen</button>
+           class="input mb-4">
+    <button type="submit" class="btn btn-primary w-full py-3 rounded-2xl">⬆️ Hochladen</button>
   </form>
 </div>
 
 <!-- Settings -->
-<div class="card p-4 mb-4">
+<div class="card p-5 mb-4">
   <div class="section-title">⚙️ Einstellungen</div>
   <form method="post">
     <input type="hidden" name="post_action" value="update_settings">
 
     <label class="label" for="daily_goal">Tagesziel (Vokabeln)</label>
-    <input type="number" id="daily_goal" name="daily_goal" class="input mb-3"
+    <input type="number" id="daily_goal" name="daily_goal" class="input mb-4"
            value="<?= (int)($profile_user['settings']['daily_goal'] ?? 30) ?>"
            min="1" max="200">
 
     <label class="label" for="theme">Farbschema</label>
-    <select id="theme" name="theme" class="input mb-3">
+    <select id="theme" name="theme" class="input mb-5">
       <option value="light"    <?= ($profile_user['settings']['theme'] ?? '') === 'light'    ? 'selected' : '' ?>>☀️ Hell</option>
       <option value="soft"     <?= ($profile_user['settings']['theme'] ?? '') === 'soft'     ? 'selected' : '' ?>>🌸 Sanft</option>
       <option value="contrast" <?= ($profile_user['settings']['theme'] ?? '') === 'contrast' ? 'selected' : '' ?>>🌙 Kontrast</option>
     </select>
 
-    <button type="submit" class="btn btn-primary w-full">Einstellungen speichern</button>
+    <button type="submit" class="btn btn-primary w-full py-3 rounded-2xl">💾 Einstellungen speichern</button>
   </form>
 </div>
 
 <!-- Delete user -->
-<div class="card p-4 mb-4" style="border-color:var(--error)">
+<div class="card p-5 mb-4" style="border-color:var(--error)">
   <div class="section-title" style="color:var(--error)">🗑️ Nutzer löschen</div>
-  <p class="text-sm text-muted mb-3">Diese Aktion kann nicht rückgängig gemacht werden.</p>
+  <p class="text-sm text-muted mb-4">Diese Aktion kann nicht rückgängig gemacht werden.</p>
   <form method="post" onsubmit="return confirm('Nutzer wirklich löschen?')">
     <input type="hidden" name="post_action" value="delete_user">
-    <button type="submit" class="btn btn-error w-full">Nutzer löschen</button>
+    <button type="submit" class="btn btn-error w-full py-3 rounded-2xl">🗑️ Nutzer löschen</button>
   </form>
 </div>
 

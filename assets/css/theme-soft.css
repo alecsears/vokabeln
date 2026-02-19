@@ -1,18 +1,21 @@
 /* theme-soft.css – warm pastel palette */
 :root {
-  --bg: #fdf6ee;
-  --card-bg: #fffdf8;
+  --bg: #fdf4ec;
+  --card-bg: #fffdf9;
   --text: #3d2b1f;
-  --primary: #e07b54;
+  --primary: #f97316;
+  --primary-dark: #ea580c;
   --primary-text: #ffffff;
-  --secondary: #a07060;
-  --border: #f0d9c8;
-  --success: #6dbf8a;
-  --error: #e05454;
+  --primary-shadow: rgba(249,115,22,0.36);
+  --primary-glow: rgba(249,115,22,0.18);
+  --secondary: #9a6650;
+  --border: #f0d9c4;
+  --success: #22c55e;
+  --error: #f43f5e;
 }
 body { background: var(--bg); color: var(--text); }
-.btn-primary  { background: var(--primary);  color: var(--primary-text); }
-.btn-success  { background: var(--success);  color: #fff; }
-.btn-error    { background: var(--error);    color: #fff; }
+.btn-primary  { background: linear-gradient(135deg, #f97316, #ea580c); color: var(--primary-text); }
+.btn-success  { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
+.btn-error    { background: linear-gradient(135deg, #f43f5e, #e11d48); color: #fff; }
 .card         { background: var(--card-bg);  border: 1px solid var(--border); }
-.motivation-toast { background: var(--primary); color: var(--primary-text); }
+.motivation-toast { background: linear-gradient(135deg, #f97316, #ea580c); color: var(--primary-text); }

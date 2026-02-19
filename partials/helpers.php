@@ -3,6 +3,21 @@ declare(strict_types=1);
 
 define('BASE_PATH', realpath(__DIR__ . '/..'));
 
+// Auto-detect the subdirectory the app lives in (e.g. "" for root or "/vokabeln" for a subfolder).
+// Uses SCRIPT_NAME of the current entry-point, so it is correct regardless of which PHP file is
+// being served.
+if (!defined('BASE_URL')) {
+    define('BASE_URL', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'));
+}
+
+/**
+ * Redirect to a path relative to the app root and exit.
+ * Example: redirect('index.php') or redirect('profile.php?user=u0001')
+ */
+function redirect(string $path): never {
+    header('Location: ' . BASE_URL . '/' . ltrim($path, '/'));
+    exit;
+}
 function read_json(string $path, mixed $default = []): mixed {
     if (!file_exists($path)) return $default;
     $content = file_get_contents($path);
