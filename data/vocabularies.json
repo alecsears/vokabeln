@@ -1,0 +1,85 @@
+{
+  "meta": { "language_pair": "de-en", "created_at": "2026-02-11" },
+  "vocabularies": [
+    {
+      "id": "v0001",
+      "de": "Ich bin aus Greenwich.",
+      "en": "I'm from Greenwich.",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0002",
+      "de": "Wie heißt du?",
+      "en": "What's your name?",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0003",
+      "de": "Ich bin zwölf Jahre alt.",
+      "en": "I'm twelve years old.",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0004",
+      "de": "Das ist mein Freund.",
+      "en": "This is my friend.",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0005",
+      "de": "Wo wohnst du?",
+      "en": "Where do you live?",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0006",
+      "de": "Wie alt bist du?",
+      "en": "How old are you?",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0007",
+      "de": "Ich heiße Anna.",
+      "en": "My name is Anna.",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0008",
+      "de": "Guten Morgen!",
+      "en": "Good morning!",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0009",
+      "de": "Auf Wiedersehen!",
+      "en": "Goodbye!",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    },
+    {
+      "id": "v0010",
+      "de": "Ich wohne in Berlin.",
+      "en": "I live in Berlin.",
+      "enabled": true,
+      "box": 1,
+      "stats": { "correct": 0, "wrong": 0, "last_seen": null }
+    }
+  ]
+}

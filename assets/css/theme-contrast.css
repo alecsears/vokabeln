@@ -1,0 +1,18 @@
+/* theme-contrast.css – high contrast dark theme */
+:root {
+  --bg: #0d0d0d;
+  --card-bg: #1a1a1a;
+  --text: #f5f5f5;
+  --primary: #facc15;
+  --primary-text: #0d0d0d;
+  --secondary: #a3a3a3;
+  --border: #333333;
+  --success: #22c55e;
+  --error: #f87171;
+}
+body { background: var(--bg); color: var(--text); }
+.btn-primary  { background: var(--primary);  color: var(--primary-text); font-weight: 800; }
+.btn-success  { background: var(--success);  color: #000; font-weight: 700; }
+.btn-error    { background: var(--error);    color: #000; font-weight: 700; }
+.card         { background: var(--card-bg);  border: 1px solid var(--border); }
+.motivation-toast { background: var(--primary); color: var(--primary-text); }
