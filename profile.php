@@ -11,8 +11,7 @@ foreach ($users_data['users'] as $u) {
 }
 
 if ($profile_user === null) {
-    header('Location: /users.php');
-    exit;
+    redirect('users.php');
 }
 
 $success = '';
@@ -97,8 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $design = get_design();
             $design['theme'] = $theme;
             write_json_atomic(BASE_PATH . '/config/design.json', $design);
-            header('Location: /profile.php?user=' . urlencode($uid) . '&saved=1');
-            exit;
+            redirect('profile.php?user=' . urlencode($uid) . '&saved=1');
         }
         $success = 'Einstellungen gespeichert.';
     }
@@ -123,8 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $settings['current_user_id'] = $users_data['users'][0]['id'] ?? 'u0001';
                 write_json_atomic(BASE_PATH . '/data/settings.json', $settings);
             }
-            header('Location: /users.php');
-            exit;
+            redirect('users.php');
         }
     }
 }
@@ -136,8 +133,7 @@ if (isset($_GET['switch']) && $_GET['switch'] === '1') {
     $settings = get_settings();
     $settings['current_user_id'] = $uid;
     write_json_atomic(BASE_PATH . '/data/settings.json', $settings);
-    header('Location: /index.php');
-    exit;
+    redirect('index.php');
 }
 
 $user_stats  = get_statistics();
@@ -151,7 +147,7 @@ require_once __DIR__ . '/partials/header.php';
   <div class="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center text-4xl ring-2 flex-shrink-0"
        style="background:var(--border);ring-color:var(--primary)">
     <?php if (!empty($profile_user['avatar']) && file_exists(BASE_PATH . '/uploads/avatars/' . basename($profile_user['avatar']))): ?>
-      <img src="/uploads/avatars/<?= htmlspecialchars(basename($profile_user['avatar'])) ?>"
+      <img src="uploads/avatars/<?= htmlspecialchars(basename($profile_user['avatar'])) ?>"
            alt="Avatar" class="w-full h-full object-cover">
     <?php else: ?>👤<?php endif; ?>
   </div>
@@ -160,7 +156,7 @@ require_once __DIR__ . '/partials/header.php';
     <div class="text-xs text-muted mt-0.5">ID: <?= htmlspecialchars($uid) ?></div>
   </div>
   <?php if ($uid !== get_current_user_id()): ?>
-    <a href="/profile.php?user=<?= htmlspecialchars($uid) ?>&switch=1"
+    <a href="profile.php?user=<?= htmlspecialchars($uid) ?>&switch=1"
        class="btn btn-primary text-sm px-4 py-2 rounded-2xl flex-shrink-0">Als <?= htmlspecialchars($profile_user['name']) ?> spielen</a>
   <?php endif; ?>
 </div>

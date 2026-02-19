@@ -52,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         write_json_atomic(BASE_PATH . '/data/users.json', $users_data);
         $success = 'Design-Einstellungen gespeichert.';
         // Redirect to reload with new theme
-        header('Location: /settings.php?saved=1');
-        exit;
+        redirect('settings.php?saved=1');
     }
 }
 

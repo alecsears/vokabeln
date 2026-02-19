@@ -89,7 +89,7 @@ require_once __DIR__ . '/partials/header.php';
 <div class="card p-6 text-center">
   <div class="text-4xl mb-3">📭</div>
   <p class="font-semibold mb-4" style="color:var(--text)">Keine Vokabeln in den ausgewählten Boxen.</p>
-  <a href="/index.php" class="btn btn-primary">← Zurück</a>
+  <a href="index.php" class="btn btn-primary">← Zurück</a>
 </div>
 <?php else: ?>
 
@@ -173,9 +173,9 @@ require_once __DIR__ . '/partials/header.php';
     </div>
   </div>
   <div class="flex gap-3 justify-center">
-    <a href="/training.php?boxes=<?= htmlspecialchars($boxes_param) ?>&direction=<?= htmlspecialchars($direction) ?>"
+    <a href="training.php?boxes=<?= htmlspecialchars($boxes_param) ?>&direction=<?= htmlspecialchars($direction) ?>"
        class="btn btn-primary px-6 py-3 rounded-2xl">🔁 Nochmal</a>
-    <a href="/index.php" class="btn btn-secondary px-6 py-3 rounded-2xl">🏠 Home</a>
+    <a href="index.php" class="btn btn-secondary px-6 py-3 rounded-2xl">🏠 Home</a>
   </div>
 </div>
 

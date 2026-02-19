@@ -10,12 +10,12 @@
   </div>
 </footer>
 
-<script src="/assets/js/tts.js"></script>
-<script src="/assets/js/api.js"></script>
-<script src="/assets/js/app.js"></script>
+<script src="assets/js/tts.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/app.js"></script>
 <?php if (!empty($extra_scripts)): ?>
 <?php foreach ($extra_scripts as $s): ?>
-<script src="<?= htmlspecialchars($s) ?>"></script>
+<script src="<?= htmlspecialchars(ltrim($s, '/')) ?>"></script>
 <?php endforeach; ?>
 <?php endif; ?>
 </body>

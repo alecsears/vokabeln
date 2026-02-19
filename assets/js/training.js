@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SET    = window.TRAINING_SET    || [];
     const USER_ID = window.TRAINING_USER_ID || '';
     const LANG_FRONT = window.TRAINING_LANG_FRONT || 'de';
+    const BASE   = (window.BASE_URL || '');
 
     let index   = 0;
     let correct = 0;
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // POST to server
         try {
-            await API.post('/training.php?action=answer', {
+            await API.post(BASE + '/training.php?action=answer', {
                 vocab_id: card.id,
                 correct:  isCorrect,
                 user_id:  USER_ID,
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (rWrong)   rWrong.textContent   = wrong;
             if (rTotal)   rTotal.textContent   = SET.length;
         }
-        API.post('/training.php?action=end_set', { user_id: USER_ID, correct, wrong, total: SET.length })
+        API.post(BASE + '/training.php?action=end_set', { user_id: USER_ID, correct, wrong, total: SET.length })
            .catch(() => {});
     }
 
@@ -157,11 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnWrong)   btnWrong.addEventListener('click',   () => submitAnswer(false));
 
     if (btnPause) btnPause.addEventListener('click', () => {
-        API.post('/training.php?action=pause', {
+        API.post(BASE + '/training.php?action=pause', {
             user_id: USER_ID,
             session: { correct, wrong, index, set_size: SET.length }
         }).catch(() => {});
-        window.location.href = '/index.php';
+        window.location.href = BASE + '/index.php';
     });
 
     if (btnEndSet) btnEndSet.addEventListener('click', () => {

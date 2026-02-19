@@ -34,7 +34,7 @@ require_once __DIR__ . '/partials/header.php';
   <div class="w-14 h-14 rounded-full overflow-hidden flex items-center justify-center text-3xl ring-2 flex-shrink-0"
        style="background:var(--border);ring-color:var(--primary)">
     <?php if (!empty($current_user['avatar'])): ?>
-      <img src="/uploads/avatars/<?= htmlspecialchars(basename($current_user['avatar'])) ?>"
+      <img src="uploads/avatars/<?= htmlspecialchars(basename($current_user['avatar'])) ?>"
            alt="Avatar" class="w-full h-full object-cover">
     <?php else: ?>
       👤
@@ -44,7 +44,7 @@ require_once __DIR__ . '/partials/header.php';
     <div class="text-xs font-medium text-muted">Willkommen zurück 👋</div>
     <div class="text-xl font-bold truncate" style="color:var(--text)"><?= htmlspecialchars($current_user['name'] ?? 'Nutzer') ?></div>
   </div>
-  <a href="/users.php" class="btn btn-secondary text-sm px-3 py-2 flex-shrink-0">Wechseln</a>
+  <a href="users.php" class="btn btn-secondary text-sm px-3 py-2 flex-shrink-0">Wechseln</a>
 </div>
 
 <!-- Donut chart + stats -->
@@ -86,7 +86,7 @@ require_once __DIR__ . '/partials/header.php';
 <!-- Training settings -->
 <div class="card p-5 mb-5 shadow-sm">
   <div class="section-title">🎯 Training konfigurieren</div>
-  <form action="/training.php" method="get" id="training-form">
+  <form action="training.php" method="get" id="training-form">
 
     <div class="mb-4">
       <div class="label">Boxen auswählen</div>
@@ -140,11 +140,11 @@ $progress_pct = $daily_goal > 0 ? min(100, round(($today_total / $daily_goal) * 
 
 <!-- Quick nav -->
 <div class="grid grid-cols-2 gap-3">
-  <a href="/stats.php" class="btn btn-secondary flex-col py-5 gap-1 rounded-2xl">
+  <a href="stats.php" class="btn btn-secondary flex-col py-5 gap-1 rounded-2xl">
     <span class="text-2xl">📊</span>
     <span class="text-xs font-semibold">Statistik</span>
   </a>
-  <a href="/settings.php" class="btn btn-secondary flex-col py-5 gap-1 rounded-2xl">
+  <a href="settings.php" class="btn btn-secondary flex-col py-5 gap-1 rounded-2xl">
     <span class="text-2xl">⚙️</span>
     <span class="text-xs font-semibold">Einstellungen</span>
   </a>

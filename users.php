@@ -58,7 +58,7 @@ require_once __DIR__ . '/partials/header.php';
 <div class="grid grid-cols-2 gap-4 mb-6">
   <?php foreach ($users as $u): ?>
     <?php $us = $stats_data['users'][$u['id']] ?? []; ?>
-    <a href="/profile.php?user=<?= htmlspecialchars($u['id']) ?>"
+    <a href="profile.php?user=<?= htmlspecialchars($u['id']) ?>"
        class="card p-4 flex flex-col items-center gap-2 text-center no-underline"
        style="transition:transform 0.2s ease,box-shadow 0.2s ease"
        onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'"
@@ -66,7 +66,7 @@ require_once __DIR__ . '/partials/header.php';
       <div class="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center text-3xl ring-2"
            style="background:var(--border);ring-color:var(--border)">
         <?php if (!empty($u['avatar']) && file_exists(BASE_PATH . '/uploads/avatars/' . basename($u['avatar']))): ?>
-          <img src="/uploads/avatars/<?= htmlspecialchars(basename($u['avatar'])) ?>"
+          <img src="uploads/avatars/<?= htmlspecialchars(basename($u['avatar'])) ?>"
                alt="Avatar" class="w-full h-full object-cover">
         <?php else: ?>
           👤
