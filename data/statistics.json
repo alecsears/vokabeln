@@ -1,0 +1,17 @@
+{
+  "users": {
+    "u0001": {
+      "total_correct": 0,
+      "total_wrong": 0,
+      "daily_history": [],
+      "badges": [],
+      "current_session": null,
+      "today": {
+        "date": null,
+        "correct": 0,
+        "wrong": 0,
+        "total": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "u0001",
+      "name": "Mia",
+      "avatar": null,
+      "settings": {
+        "daily_goal": 30,
+        "theme": "light",
+        "css_framework": "tailwind"
+      }
+    }
+  ],
+  "meta": { "last_user_id": "u0001" }
+}

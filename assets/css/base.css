@@ -1,0 +1,208 @@
+/* base.css – shared styles */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── 3-D Card flip ── */
+.card-scene {
+  perspective: 900px;
+  width: 100%;
+  min-height: 200px;
+}
+
+.card-flip {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.card-flip.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.card-face--back {
+  transform: rotateY(180deg);
+}
+
+/* Stack effect – sibling cards behind the active card */
+.card-stack {
+  position: relative;
+  min-height: 220px;
+}
+
+.card-stack-item {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  transition: transform 0.3s;
+}
+
+.card-stack-item:nth-child(1) { transform: rotate(2deg) translateY(6px); z-index: 1; }
+.card-stack-item:nth-child(2) { transform: rotate(-1.5deg) translateY(3px); z-index: 2; }
+.card-stack-item.active { position: relative; z-index: 10; transform: none; }
+
+/* ── Progress bar ── */
+.progress-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary);
+  transition: width 0.4s ease;
+}
+
+/* ── Badge cards ── */
+.badge-card {
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badge-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* ── Motivation toast ── */
+.motivation-toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  animation: toast-in 0.4s ease, toast-out 0.4s ease 1.6s forwards;
+  z-index: 999;
+  pointer-events: none;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes toast-out {
+  to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+}
+
+/* ── Dismiss slide-out ── */
+@keyframes card-dismiss-correct {
+  to { transform: translateX(120%) rotate(15deg); opacity: 0; }
+}
+@keyframes card-dismiss-wrong {
+  to { transform: translateX(-120%) rotate(-15deg); opacity: 0; }
+}
+
+.card-dismiss-correct { animation: card-dismiss-correct 0.4s ease forwards; }
+.card-dismiss-wrong   { animation: card-dismiss-wrong   0.4s ease forwards; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  text-decoration: none;
+}
+.btn:active { transform: scale(0.96); }
+
+.btn-primary  { background: var(--primary);  color: var(--primary-text); }
+.btn-success  { background: var(--success);  color: #fff; }
+.btn-error    { background: var(--error);    color: #fff; }
+.btn-secondary { background: var(--border); color: var(--text); }
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── Form inputs ── */
+.input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus { border-color: var(--primary); }
+
+.label { font-size: 0.875rem; font-weight: 600; color: var(--secondary); margin-bottom: 0.3rem; display: block; }
+
+/* ── Cards ── */
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; }
+
+/* ── Toggle pill ── */
+.box-toggle {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.box-toggle.active {
+  background: var(--primary);
+  color: var(--primary-text);
+  border-color: var(--primary);
+}
+
+/* ── Utility ── */
+.section-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+.text-muted    { color: var(--secondary); }
+
+/* ── Alert ── */
+.alert { padding: 0.75rem 1rem; border-radius: 0.75rem; font-size: 0.9rem; margin-bottom: 1rem; }
+.alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.alert-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }

@@ -1,0 +1,18 @@
+/* theme-soft.css – warm pastel palette */
+:root {
+  --bg: #fdf6ee;
+  --card-bg: #fffdf8;
+  --text: #3d2b1f;
+  --primary: #e07b54;
+  --primary-text: #ffffff;
+  --secondary: #a07060;
+  --border: #f0d9c8;
+  --success: #6dbf8a;
+  --error: #e05454;
+}
+body { background: var(--bg); color: var(--text); }
+.btn-primary  { background: var(--primary);  color: var(--primary-text); }
+.btn-success  { background: var(--success);  color: #fff; }
+.btn-error    { background: var(--error);    color: #fff; }
+.card         { background: var(--card-bg);  border: 1px solid var(--border); }
+.motivation-toast { background: var(--primary); color: var(--primary-text); }
